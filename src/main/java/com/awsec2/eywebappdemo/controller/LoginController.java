@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class LoginController {
-	
+
 	@RequestMapping("/login")
 	@ResponseBody
 	public String login() {
@@ -22,7 +22,7 @@ public class LoginController {
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			System.out.println("Request log at: " + sdf2.format(timestamp));
 			return "Your current Hostname : " + hostname + "<br>" + sdf2.format(timestamp);
-		}
+		} 
 		catch (UnknownHostException ex) {
 			return "Unknown host!";
 		}
@@ -32,16 +32,10 @@ public class LoginController {
 	@RequestMapping("/")
 	@ResponseBody
 	public String healthy() {
-		try {
-			InetAddress ip = InetAddress.getLocalHost();
-			SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-			System.out.println("Health check at: " + sdf2.format(timestamp));
-			return "Healthy at: " + sdf2.format(timestamp);
-		}
-		catch (UnknownHostException ex) {
-			return "Unhealthy!";
-		}
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		System.out.println("Health check at: " + sdf2.format(timestamp));
+		return "Healthy at: " + sdf2.format(timestamp);
 	}
 
 }
