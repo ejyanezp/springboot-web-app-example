@@ -20,10 +20,28 @@ public class LoginController {
 			String hostname = ip.getHostName();
 			SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			System.out.println("Request log at: " + sdf2.format(timestamp));
 			return "Your current Hostname : " + hostname + "<br>" + sdf2.format(timestamp);
 		}
 		catch (UnknownHostException ex) {
 			return "Unknown host!";
 		}
 	}
+
+	// Assign the web resource "/" for the health check.
+	@RequestMapping("/")
+	@ResponseBody
+	public String healthy() {
+		try {
+			InetAddress ip = InetAddress.getLocalHost();
+			SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			System.out.println("Health check at: " + sdf2.format(timestamp));
+			return "Healthy at: " + sdf2.format(timestamp);
+		}
+		catch (UnknownHostException ex) {
+			return "Unhealthy!";
+		}
+	}
+
 }
